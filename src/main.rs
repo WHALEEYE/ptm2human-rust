@@ -1,8 +1,9 @@
+mod stream;
+mod tracer_etmv4;
 use clap::{arg, command};
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
-mod stream;
 
 fn main() {
     let mut output_path: Option<&Path> = None;
@@ -28,6 +29,6 @@ fn main() {
     }
 
     let mut input_file = File::open(input_path.unwrap()).unwrap();
-    let mut etm_stream = stream::stream { buff: Vec::new() };
+    let mut etm_stream = stream::Stream::new();
     input_file.read_to_end(&mut etm_stream.buff).unwrap();
 }
