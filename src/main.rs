@@ -1,9 +1,11 @@
-mod stream;
-mod tracer_etmv4;
-use clap::{arg, command};
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
+
+use clap::{arg, command};
+
+mod stream;
+mod tracer_etmv4;
 
 fn main() {
     let mut output_path: Option<&Path> = None;
@@ -15,8 +17,8 @@ fn main() {
             arg!(
                 -o --output <FILE> "Redirect the decode results to another file"
             )
-            .required(false)
-            .allow_invalid_utf8(true),
+                .required(false)
+                .allow_invalid_utf8(true),
         )
         .get_matches();
 
