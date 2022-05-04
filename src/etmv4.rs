@@ -270,7 +270,7 @@ pub fn decode_exception(pkt_offset: usize, stream: &mut Stream) -> Result<usize,
             return Err("Invalid EE in the exception packet");
         } else if ee == 2 {
             /* there is an address packet */
-            data1 = stream.buff[index];
+            data1 = stream.buff[pkt_offset + index];
             let mut packet = None;
             for tracepkt in &TRACEPKTS {
                 if (data1 & tracepkt.mask) == tracepkt.val {
@@ -279,7 +279,7 @@ pub fn decode_exception(pkt_offset: usize, stream: &mut Stream) -> Result<usize,
                 }
             }
             if let Some(pkt) = packet {
-                match get_decode_func(pkt.name).unwrap()(index, stream) {
+                match get_decode_func(pkt.name).unwrap()(index + pkt_offset, stream) {
                     Ok(idx) => {
                         index += idx;
                     }

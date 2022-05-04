@@ -16,10 +16,7 @@ fn main() {
 
     let matches = command!()
         .arg(arg!([input] "The file of the ETM stream").required(true))
-        .arg(arg!(-o --output <FILE> "Redirect the decode results to another file")
-                 .required(false)
-                 .allow_invalid_utf8(true),
-        ).get_matches();
+        .get_matches();
 
     if let Some(input) = matches.value_of("input") {
         input_path = Some(Path::new(input));

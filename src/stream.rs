@@ -74,6 +74,9 @@ pub fn decode_stream(stream: &mut Stream) {
             cur += 1;
             continue;
         }
+        if cur == 79008 {
+            println!("123");
+        }
         match get_decode_func(packet.unwrap().name).unwrap()(cur, stream) {
             Ok(i) => {
                 cur += i;
